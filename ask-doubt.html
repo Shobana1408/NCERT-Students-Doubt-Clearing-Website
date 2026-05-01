@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ask Doubt — NCERT Doubt Solver</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="css/theme.css" rel="stylesheet" />
+  <style>
+    .ad-form-card {
+      background: #ffffff;
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
+      border: 1px solid rgba(15, 23, 42, 0.06);
+    }
+    .ad-label {
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .ad-hint {
+      font-size: 0.9rem;
+      color: #6b7280;
+      margin-top: 8px;
+    }
+    .ad-dropzone {
+      border: 2px dashed #cbd5e1;
+      border-radius: 20px;
+      padding: 28px;
+      text-align: center;
+      background: #f8fafc;
+      transition: 0.2s ease;
+      cursor: pointer;
+    }
+    .ad-dropzone.dragover {
+      border-color: #0d6efd;
+      background: #eff6ff;
+    }
+    .ad-preview-img {
+      max-width: 100%;
+      max-height: 320px;
+      border-radius: 16px;
+      object-fit: contain;
+    }
+    .ad-preview-wrap {
+      position: relative;
+    }
+    #btnClearImage {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 2;
+    }
+    .ad-loading-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.45);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+    .ad-loading-box {
+      background: #fff;
+      padding: 24px 28px;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+      text-align: center;
+      min-width: 280px;
+    }
+    .ad-tip-box {
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      border-radius: 16px;
+      padding: 14px 16px;
+      color: #7c2d12;
+      font-size: 0.95rem;
+    }
+    .nc-badge-soft {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: #eef2ff;
+      color: #4338ca;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body class="nc-page d-flex flex-column">
+  <nav class="navbar navbar-expand-lg nc-navbar sticky-top py-2">
+    <div class="container-fluid px-3 px-lg-4">
+      <a class="navbar-brand nc-brand d-flex align-items-center gap-2" href="student-dashboard.html">
+        <span class="d-flex align-items-center justify-content-center rounded-3 bg-primary bg-opacity-10 text-primary p-2">
+          <i class="bi bi-mortarboard-fill fs-5"></i>
+        </span>
+        <span>NCERT Doubt<span class="text-primary">Solver</span></span>
+      </a>
+
+      <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#ncNav" aria-controls="ncNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="ncNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+          <li class="nav-item"><a class="nav-link nc-nav-link" href="student-dashboard.html"><i class="bi bi-grid-1x2 me-1"></i> Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link nc-nav-link active" href="ask-doubt.html"><i class="bi bi-chat-quote me-1"></i> Ask doubt</a></li>
+          <li class="nav-item"><a class="nav-link nc-nav-link" href="doubt-history.html"><i class="bi bi-clock-history me-1"></i> History</a></li>
+          <li class="nav-item ms-lg-2 pt-2 pt-lg-0">
+            <div class="dropdown">
+              <button class="btn btn-nc-ghost dropdown-toggle d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-person-circle fs-4 text-primary"></i>
+                <span id="navUserName">Student</span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end shadow border-0 nc-card mt-2 py-2">
+                <li><a class="dropdown-item rounded-2" href="student-dashboard.html"><i class="bi bi-grid-1x2 me-2"></i> Dashboard</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><a class="dropdown-item rounded-2 text-danger" href="student-login.html" id="logoutBtn"><i class="bi bi-box-arrow-right me-2"></i> Log out</a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="nc-main flex-grow-1 py-4 py-lg-5">
+    <div class="container" style="max-width: 920px;">
+      <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb small mb-0">
+          <li class="breadcrumb-item"><a href="student-dashboard.html" class="text-decoration-none">Dashboard</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Ask doubt</li>
+        </ol>
+      </nav>
+
+      <div class="text-center mb-4">
+        <span class="nc-badge-soft"><i class="bi bi-stars me-1"></i> Step 1 of 2</span>
+        <h1 class="fw-bold mt-3 mb-2">Ask your NCERT doubt</h1>
+        <p class="text-muted mb-0">Choose your class and topic, then type your question or upload a photo.</p>
+      </div>
+
+      <div id="formError" class="alert alert-danger border-0 shadow-sm d-none mb-4" role="alert">
+        <div class="d-flex gap-2 align-items-start">
+          <i class="bi bi-exclamation-circle-fill flex-shrink-0 mt-1"></i>
+          <span id="formErrorText"></span>
+        </div>
+      </div>
+
+      <form id="doubtForm" class="ad-form-card p-4 p-md-5" novalidate>
+        <div class="row g-4">
+          <div class="col-12">
+            <div class="ad-tip-box">
+              <strong><i class="bi bi-lightbulb text-warning me-1"></i>How it works</strong>
+              — Pick your class and chapter, type your question or upload an image, then go to the result page.
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <label class="ad-label d-block" for="classGrade"><i class="bi bi-mortarboard text-primary me-1"></i> Class</label>
+            <select class="form-select" id="classGrade" required>
+              <option value="">Select class</option>
+              <option value="6">Class 6</option>
+              <option value="7">Class 7</option>
+              <option value="8">Class 8</option>
+              <option value="9">Class 9</option>
+              <option value="10">Class 10</option>
+              <option value="11">Class 11</option>
+              <option value="12">Class 12</option>
+            </select>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <label class="ad-label d-block" for="subject"><i class="bi bi-journal-bookmark text-primary me-1"></i> Subject</label>
+            <select class="form-select" id="subject" required>
+              <option value="">Select subject</option>
+              <option value="Mathematics">Mathematics</option>
+              <option value="Science">Science</option>
+              <option value="Social Science">Social Science</option>
+              <option value="English">English</option>
+              <option value="Hindi">Hindi</option>
+            </select>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <label class="ad-label d-block" for="chapter"><i class="bi bi-bookmark text-primary me-1"></i> Chapter</label>
+            <select class="form-select" id="chapter" required disabled>
+              <option value="">Choose a subject first</option>
+            </select>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <label class="ad-label d-block" for="language"><i class="bi bi-translate text-primary me-1"></i> Answer language</label>
+            <select class="form-select" id="language" required>
+              <option value="English" selected>English</option>
+              <option value="Hindi">Hindi</option>
+              <option value="Tamil">Tamil</option>
+              <option value="Telugu">Telugu</option>
+              <option value="Bengali">Bengali</option>
+              <option value="Marathi">Marathi</option>
+            </select>
+          </div>
+
+          <div class="col-12">
+            <label class="ad-label d-block" for="questionText"><i class="bi bi-pencil text-primary me-1"></i> Your question</label>
+            <textarea
+              class="form-control"
+              id="questionText"
+              rows="6"
+              placeholder="Example: Why is diffusion insufficient to meet the oxygen requirements of multicellular organisms like humans?"
+            ></textarea>
+            <p class="ad-hint mb-0"><i class="bi bi-info-circle me-1"></i>Either type here or add an image below — at least one is required.</p>
+          </div>
+
+          <div class="col-12">
+            <label class="ad-label d-block"><i class="bi bi-image text-primary me-1"></i> Question image <span class="text-muted fw-normal">(optional)</span></label>
+            <input type="file" class="d-none" id="questionImage" accept="image/png,image/jpeg,image/webp" />
+            <div id="dropzone" class="ad-dropzone" role="button" tabindex="0" aria-label="Upload question image">
+              <div id="dropzonePlaceholder">
+                <i class="bi bi-cloud-arrow-up display-6 text-primary d-block mb-2"></i>
+                <p class="fw-semibold mb-1">Drag & drop your image here</p>
+                <p class="small text-muted mb-0">or click to browse · PNG, JPG, WebP</p>
+              </div>
+              <div class="ad-preview-wrap position-relative d-none w-100" id="previewContainer">
+                <button type="button" class="btn btn-sm btn-danger rounded-pill d-none" id="btnClearImage">
+                  <i class="bi bi-x-lg"></i> Remove
+                </button>
+                <img id="imagePreview" src="" alt="Question preview" class="ad-preview-img d-none mx-auto d-block" />
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 d-flex flex-wrap gap-2 justify-content-between align-items-center pt-2 border-top mt-1">
+            <p class="small text-muted mb-0">
+              <i class="bi bi-shield-check text-success me-1"></i> Frontend-only mode. No backend required.
+            </p>
+            <button type="submit" class="btn btn-nc-primary btn-lg px-4" id="btnSubmitDoubt">
+              <span class="submit-label"><i class="bi bi-send-fill me-2"></i> Get answer</span>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <div id="loadingOverlay" class="ad-loading-overlay">
+    <div class="ad-loading-box">
+      <div class="spinner-border text-primary mb-3" role="status"></div>
+      <h5 class="fw-bold mb-2">Preparing your result</h5>
+      <p class="text-muted mb-0">Saving your doubt and opening the result page…</p>
+    </div>
+  </div>
+
+  <footer class="nc-footer py-3 mt-auto">
+    <div class="container text-center text-md-start">
+      <span class="text-muted small">NCERT Doubt Solver · Ask doubt</span>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/app.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const user = JSON.parse(localStorage.getItem("loggedInUser"));
+      const navUserName = document.getElementById("navUserName");
+      const logoutBtn = document.getElementById("logoutBtn");
+      const subjectSelect = document.getElementById("subject");
+      const chapterSelect = document.getElementById("chapter");
+      const form = document.getElementById("doubtForm");
+      const questionText = document.getElementById("questionText");
+      const classGrade = document.getElementById("classGrade");
+      const language = document.getElementById("language");
+      const imageInput = document.getElementById("questionImage");
+      const loadingOverlay = document.getElementById("loadingOverlay");
+      const formError = document.getElementById("formError");
+      const formErrorText = document.getElementById("formErrorText");
+      const dropzone = document.getElementById("dropzone");
+      const imagePreview = document.getElementById("imagePreview");
+      const previewContainer = document.getElementById("previewContainer");
+      const dropzonePlaceholder = document.getElementById("dropzonePlaceholder");
+      const btnClearImage = document.getElementById("btnClearImage");
+
+      const chaptersBySubject = {
+        "Mathematics": ["Real Numbers", "Polynomials", "Quadratic Equations", "Triangles", "Statistics"],
+        "Science": ["Life Processes", "Control and Coordination", "How do Organisms Reproduce?", "Heredity and Evolution", "Light – Reflection and Refraction"],
+        "Social Science": ["Resources and Development", "Nationalism in India", "Power Sharing", "Money and Credit", "Globalisation"],
+        "English": ["A Letter to God", "Nelson Mandela", "Two Stories about Flying", "From the Diary of Anne Frank"],
+        "Hindi": ["बड़े भाई साहब", "डायरी का एक पन्ना", "तताँरा-वामीरो कथा", "साखी"]
+      };
+
+      if (!user) {
+        window.location.href = "student-login.html";
+        return;
+      }
+
+      if (navUserName) {
+        navUserName.textContent = user.name || "Student";
+      }
+
+      if (logoutBtn) {
+        logoutBtn.addEventListener("click", function () {
+          localStorage.removeItem("loggedInUser");
+          localStorage.removeItem("doubtData");
+        });
+      }
+
+      function showError(message) {
+        formErrorText.textContent = message;
+        formError.classList.remove("d-none");
+      }
+
+      function clearError() {
+        formErrorText.textContent = "";
+        formError.classList.add("d-none");
+      }
+
+      function populateChapters(subject) {
+        chapterSelect.innerHTML = "";
+        if (!subject || !chaptersBySubject[subject]) {
+          chapterSelect.disabled = true;
+          chapterSelect.innerHTML = '<option value="">Choose a subject first</option>';
+          return;
+        }
+
+        chapterSelect.disabled = false;
+
+        const defaultOption = document.createElement("option");
+        defaultOption.value = "";
+        defaultOption.textContent = "Select chapter";
+        defaultOption.disabled = true;
+        defaultOption.selected = true;
+        chapterSelect.appendChild(defaultOption);
+
+        chaptersBySubject[subject].forEach(function (chapter) {
+          const option = document.createElement("option");
+          option.value = chapter;
+          option.textContent = chapter;
+          chapterSelect.appendChild(option);
+        });
+      }
+
+      subjectSelect.addEventListener("change", function () {
+        populateChapters(this.value);
+      });
+
+      function resetPreview() {
+        imageInput.value = "";
+        imagePreview.src = "";
+        imagePreview.classList.add("d-none");
+        previewContainer.classList.add("d-none");
+        btnClearImage.classList.add("d-none");
+        dropzonePlaceholder.classList.remove("d-none");
+      }
+
+      function showPreview(file) {
+        if (!file || !file.type.startsWith("image/")) return;
+
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          imagePreview.src = e.target.result;
+          imagePreview.classList.remove("d-none");
+          previewContainer.classList.remove("d-none");
+          btnClearImage.classList.remove("d-none");
+          dropzonePlaceholder.classList.add("d-none");
+        };
+        reader.readAsDataURL(file);
+      }
+
+      dropzone.addEventListener("click", function () {
+        imageInput.click();
+      });
+
+      dropzone.addEventListener("dragover", function (e) {
+        e.preventDefault();
+        dropzone.classList.add("dragover");
+      });
+
+      dropzone.addEventListener("dragleave", function () {
+        dropzone.classList.remove("dragover");
+      });
+
+      dropzone.addEventListener("drop", function (e) {
+        e.preventDefault();
+        dropzone.classList.remove("dragover");
+        const files = e.dataTransfer.files;
+        if (files && files[0]) {
+          imageInput.files = files;
+          showPreview(files[0]);
+        }
+      });
+
+      imageInput.addEventListener("change", function () {
+        if (this.files && this.files[0]) {
+          showPreview(this.files[0]);
+        }
+      });
+
+      btnClearImage.addEventListener("click", function (e) {
+        e.stopPropagation();
+        resetPreview();
+      });
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        clearError();
+
+        const question = questionText.value.trim();
+        const selectedClass = classGrade.value;
+        const selectedSubject = subjectSelect.value;
+        const selectedChapter = chapterSelect.value;
+        const selectedLanguage = language.value;
+        const imageFile = imageInput.files && imageInput.files[0] ? imageInput.files[0] : null;
+
+        if (!selectedClass || !selectedSubject || !selectedChapter || !selectedLanguage) {
+          showError("Please fill class, subject, chapter, and language.");
+          return;
+        }
+
+        if (!question && !imageFile) {
+          showError("Please type a question or upload an image.");
+          return;
+        }
+
+        loadingOverlay.style.display = "flex";
+
+        const doubtData = {
+          class: selectedClass,
+          subject: selectedSubject,
+          chapter: selectedChapter,
+          language: selectedLanguage,
+          question: question || "Question from uploaded image",
+          createdAt: new Date().toISOString()
+        };
+
+        localStorage.setItem("doubtData", JSON.stringify(doubtData));
+
+        setTimeout(function () {
+          window.location.href = "result.html";
+        }, 500);
+      });
+    });
+  </script>
+</body>
+</html>
