@@ -1,0 +1,27 @@
+<!--
+  Admin sidebar — copy into JSP or use includes.
+  Set active class on current page's .nav-link
+-->
+<aside class="adm-sidebar" id="admSidebar">
+  <div class="adm-sidebar-brand">
+    <a href="admin-dashboard.html" class="d-flex align-items-center gap-2">
+      <span class="d-inline-flex align-items-center justify-content-center rounded-3 bg-white bg-opacity-10 text-white p-2">
+        <i class="bi bi-shield-lock-fill"></i>
+      </span>
+      NCERT Admin
+      <span class="badge bg-danger bg-opacity-75 rounded-pill ms-auto">Pro</span>
+    </a>
+    <p class="text-white-50 small mb-0 mt-2 ps-1">Doubt solver console</p>
+  </div>
+  <nav class="adm-sidebar-nav nav flex-column">
+    <a class="nav-link" href="admin-dashboard.html"><i class="bi bi-speedometer2"></i> Dashboard</a>
+    <a class="nav-link" href="admin-doubts.html"><i class="bi bi-inboxes"></i> All doubts</a>
+    <a class="nav-link" href="admin-answers-feedback.html"><i class="bi bi-chat-left-text"></i> Answers &amp; feedback</a>
+    <a class="nav-link" href="admin-subjects.html"><i class="bi bi-bookmarks"></i> Subjects</a>
+    <a class="nav-link" href="admin-chapters.html"><i class="bi bi-list-nested"></i> Chapters</a>
+  </nav>
+  <div class="adm-sidebar-footer">
+    <a href="admin-login.html" class="text-white-50 text-decoration-none"><i class="bi bi-box-arrow-left me-1"></i> Sign out</a>
+  </div>
+</aside>
+<div class="adm-sidebar-backdrop" id="admSidebarBackdrop" aria-hidden="true"></div>

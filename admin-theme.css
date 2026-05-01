@@ -1,0 +1,364 @@
+/**
+ * NCERT Doubt Solver — Admin console theme
+ * Extends Bootstrap 5 with a professional analytics / ops aesthetic
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap");
+
+:root {
+  --adm-bg: #f1f5f9;
+  --adm-surface: #ffffff;
+  --adm-sidebar: #0f172a;
+  --adm-sidebar-hover: rgba(255, 255, 255, 0.06);
+  --adm-sidebar-active: rgba(99, 102, 241, 0.22);
+  --adm-border: #e2e8f0;
+  --adm-text: #0f172a;
+  --adm-muted: #64748b;
+  --adm-accent: #4f46e5;
+  --adm-accent-soft: rgba(79, 70, 229, 0.1);
+  --adm-success: #059669;
+  --adm-danger: #dc2626;
+  --adm-warning: #d97706;
+  --adm-radius: 0.875rem;
+  --adm-shadow: 0 1px 3px rgba(15, 23, 42, 0.06), 0 4px 12px rgba(15, 23, 42, 0.04);
+  --adm-shadow-lg: 0 8px 30px rgba(15, 23, 42, 0.08);
+  --adm-font: "Inter", system-ui, sans-serif;
+  --adm-font-display: "Plus Jakarta Sans", var(--adm-font);
+}
+
+body.adm-body {
+  font-family: var(--adm-font);
+  color: var(--adm-text);
+  background: var(--adm-bg);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6, .adm-display {
+  font-family: var(--adm-font-display);
+}
+
+/* --- Sidebar --- */
+.adm-sidebar {
+  background: var(--adm-sidebar);
+  min-height: 100vh;
+  width: 260px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1040;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease;
+}
+
+.adm-sidebar-brand {
+  padding: 1.25rem 1.25rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.adm-sidebar-brand a {
+  color: #fff !important;
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  font-family: var(--adm-font-display);
+}
+
+.adm-sidebar-brand .badge {
+  font-size: 0.65rem;
+  vertical-align: middle;
+}
+
+.adm-sidebar-nav {
+  flex: 1;
+  padding: 1rem 0.75rem;
+  overflow-y: auto;
+}
+
+.adm-sidebar-nav .nav-link {
+  color: rgba(255, 255, 255, 0.72) !important;
+  border-radius: 0.65rem;
+  padding: 0.65rem 0.9rem;
+  font-weight: 500;
+  font-size: 0.925rem;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  transition: background 0.15s, color 0.15s;
+  margin-bottom: 0.2rem;
+}
+
+.adm-sidebar-nav .nav-link:hover {
+  background: var(--adm-sidebar-hover);
+  color: #fff !important;
+}
+
+.adm-sidebar-nav .nav-link.active {
+  background: var(--adm-sidebar-active);
+  color: #fff !important;
+  box-shadow: inset 3px 0 0 var(--adm-accent);
+}
+
+.adm-sidebar-nav .nav-link i {
+  font-size: 1.15rem;
+  opacity: 0.9;
+}
+
+.adm-sidebar-footer {
+  padding: 1rem 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* Main content offset */
+.adm-main-wrap {
+  margin-left: 260px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Top bar */
+.adm-topbar {
+  background: var(--adm-surface);
+  border-bottom: 1px solid var(--adm-border);
+  padding: 0.85rem 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+}
+
+.adm-topbar-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Analytics cards */
+.adm-kpi-card {
+  background: var(--adm-surface);
+  border: 1px solid var(--adm-border);
+  border-radius: var(--adm-radius);
+  padding: 1.35rem 1.5rem;
+  box-shadow: var(--adm-shadow);
+  height: 100%;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.adm-kpi-card:hover {
+  box-shadow: var(--adm-shadow-lg);
+  transform: translateY(-2px);
+}
+
+.adm-kpi-icon {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+}
+
+.adm-kpi-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  font-family: var(--adm-font-display);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+
+.adm-kpi-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--adm-muted);
+}
+
+/* Table card */
+.adm-table-card {
+  background: var(--adm-surface);
+  border: 1px solid var(--adm-border);
+  border-radius: var(--adm-radius);
+  box-shadow: var(--adm-shadow);
+  overflow: hidden;
+}
+
+.adm-table thead th {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--adm-muted);
+  border-bottom-width: 1px;
+  background: #f8fafc;
+  padding: 0.9rem 1rem;
+  white-space: nowrap;
+}
+
+.adm-table tbody td {
+  padding: 0.85rem 1rem;
+  vertical-align: middle;
+  border-color: var(--adm-border);
+  font-size: 0.9rem;
+}
+
+.adm-table tbody tr:hover {
+  background: #fafbfc;
+}
+
+/* Badges */
+.adm-badge-subject {
+  font-weight: 600;
+  padding: 0.35em 0.75em;
+  border-radius: 2rem;
+  font-size: 0.75rem;
+}
+
+.adm-badge-not-helpful {
+  background: #fef2f2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+  font-weight: 600;
+}
+
+.adm-badge-helpful {
+  background: #ecfdf5;
+  color: #047857;
+  border: 1px solid #a7f3d0;
+  font-weight: 600;
+}
+
+.adm-badge-neutral {
+  background: #f1f5f9;
+  color: var(--adm-muted);
+}
+
+/* Filter toolbar */
+.adm-filter-bar {
+  background: var(--adm-surface);
+  border: 1px solid var(--adm-border);
+  border-radius: var(--adm-radius);
+  padding: 1rem 1.25rem;
+  box-shadow: var(--adm-shadow);
+}
+
+/* Auth page */
+.adm-auth-page {
+  min-height: 100vh;
+  background: linear-gradient(145deg, #0f172a 0%, #1e1b4b 45%, #312e81 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.adm-auth-card {
+  width: 100%;
+  max-width: 420px;
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35);
+  padding: 2.5rem;
+}
+
+.adm-auth-logo {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.85rem;
+  background: linear-gradient(135deg, var(--adm-accent), #7c3aed);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+/* Mobile sidebar */
+.adm-sidebar-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.5);
+  z-index: 1035;
+}
+
+.adm-sidebar-backdrop.show {
+  display: block;
+}
+
+@media (max-width: 991.98px) {
+  .adm-sidebar {
+    transform: translateX(-100%);
+  }
+
+  .adm-sidebar.show {
+    transform: translateX(0);
+  }
+
+  .adm-main-wrap {
+    margin-left: 0;
+  }
+}
+
+/* Content area */
+.adm-content {
+  padding: 1.5rem;
+  flex: 1;
+}
+
+@media (min-width: 992px) {
+  .adm-content {
+    padding: 2rem;
+  }
+}
+
+/* Form controls in admin */
+.adm-form .form-control,
+.adm-form .form-select {
+  border-radius: 0.5rem;
+  border-color: var(--adm-border);
+}
+
+.adm-form .form-control:focus,
+.adm-form .form-select:focus {
+  border-color: var(--adm-accent);
+  box-shadow: 0 0 0 0.2rem rgba(79, 70, 229, 0.15);
+}
+
+.btn-adm-primary {
+  background: linear-gradient(135deg, var(--adm-accent), #6366f1);
+  border: none;
+  color: #fff !important;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1.25rem;
+}
+
+.btn-adm-primary:hover {
+  filter: brightness(1.05);
+  color: #fff !important;
+}
+
+.btn-adm-outline {
+  border: 1px solid var(--adm-border);
+  background: #fff;
+  font-weight: 600;
+  border-radius: 0.5rem;
+}
+
+/* Highlight row for not helpful */
+.adm-row-alert td {
+  background: #fffbeb;
+  border-color: #fde68a !important;
+}
+
+/* Width helper for stacked badges */
+.adm-w-fit {
+  width: fit-content;
+}

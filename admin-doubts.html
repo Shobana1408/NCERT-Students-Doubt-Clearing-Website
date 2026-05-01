@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>All doubts — NCERT Admin</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <link href="css/admin-theme.css" rel="stylesheet" />
+</head>
+<body class="adm-body">
+  <aside class="adm-sidebar" id="admSidebar">
+    <div class="adm-sidebar-brand">
+      <a href="admin-dashboard.html" class="d-flex align-items-center gap-2">
+        <span class="d-inline-flex align-items-center justify-content-center rounded-3 bg-white bg-opacity-10 text-white p-2"><i class="bi bi-shield-lock-fill"></i></span>
+        NCERT Admin
+        <span class="badge bg-danger bg-opacity-75 rounded-pill ms-auto">Pro</span>
+      </a>
+      <p class="text-white-50 small mb-0 mt-2 ps-1">Doubt solver console</p>
+    </div>
+    <nav class="adm-sidebar-nav nav flex-column">
+      <a class="nav-link" href="admin-dashboard.html"><i class="bi bi-speedometer2"></i> Dashboard</a>
+      <a class="nav-link active" href="admin-doubts.html"><i class="bi bi-inboxes"></i> All doubts</a>
+      <a class="nav-link" href="admin-answers-feedback.html"><i class="bi bi-chat-left-text"></i> Answers &amp; feedback</a>
+      <a class="nav-link" href="admin-subjects.html"><i class="bi bi-bookmarks"></i> Subjects</a>
+      <a class="nav-link" href="admin-chapters.html"><i class="bi bi-list-nested"></i> Chapters</a>
+    </nav>
+    <div class="adm-sidebar-footer">
+      <a href="admin-login.html" class="text-white-50 text-decoration-none"><i class="bi bi-box-arrow-left me-1"></i> Sign out</a>
+    </div>
+  </aside>
+  <div class="adm-sidebar-backdrop" id="admSidebarBackdrop"></div>
+
+  <div class="adm-main-wrap">
+    <header class="adm-topbar d-flex align-items-center gap-3">
+      <button type="button" class="btn btn-light border d-lg-none" id="admSidebarToggle" aria-label="Open menu"><i class="bi bi-list"></i></button>
+      <div class="flex-grow-1">
+        <h1 class="adm-topbar-title mb-0">All doubts</h1>
+        <p class="text-muted small mb-0 d-none d-sm-block">Search and filter every student submission.</p>
+      </div>
+    </header>
+
+    <main class="adm-content">
+      <div class="adm-filter-bar adm-form mb-4">
+        <form class="row g-3 align-items-end" action="#" method="get">
+          <div class="col-md-3 col-lg-2">
+            <label class="form-label small fw-semibold mb-1" for="fSubject">Subject</label>
+            <select class="form-select" id="fSubject" name="subject">
+              <option value="">All subjects</option>
+              <option>Science</option>
+              <option>Mathematics</option>
+              <option>Social Science</option>
+              <option>English</option>
+            </select>
+          </div>
+          <div class="col-md-3 col-lg-2">
+            <label class="form-label small fw-semibold mb-1" for="fChapter">Chapter</label>
+            <select class="form-select" id="fChapter" name="chapter">
+              <option value="">All chapters</option>
+              <option>Light — Reflection</option>
+              <option>Polynomials</option>
+              <option>Nationalism in India</option>
+            </select>
+          </div>
+          <div class="col-md-3 col-lg-2">
+            <label class="form-label small fw-semibold mb-1" for="fType">Input type</label>
+            <select class="form-select" id="fType" name="type">
+              <option value="">Any</option>
+              <option>Text</option>
+              <option>Image</option>
+            </select>
+          </div>
+          <div class="col-md-3 col-lg-3">
+            <label class="form-label small fw-semibold mb-1" for="fSearch">Search</label>
+            <input type="search" class="form-control" id="fSearch" name="q" placeholder="Question text…" />
+          </div>
+          <div class="col-auto">
+            <button type="submit" class="btn btn-adm-primary"><i class="bi bi-funnel me-1"></i> Apply</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="adm-table-card">
+        <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 px-3 py-3 border-bottom bg-white">
+          <p class="small text-muted mb-0"><strong>1,248</strong> doubts · Showing 1–10</p>
+          <button type="button" class="btn btn-sm btn-adm-outline"><i class="bi bi-download me-1"></i> Export CSV</button>
+        </div>
+        <div class="table-responsive">
+          <table class="table adm-table mb-0">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Student</th>
+                <th>Subject</th>
+                <th>Chapter</th>
+                <th>Question</th>
+                <th>Type</th>
+                <th>Lang</th>
+                <th>Created</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="font-monospace small text-muted">#4021</td>
+                <td class="fw-semibold">priya.s@school.in</td>
+                <td><span class="adm-badge-subject bg-primary bg-opacity-10 text-primary">Science</span></td>
+                <td class="small">Light — Reflection</td>
+                <td class="small text-muted" style="max-width: 220px;">State the laws of reflection…</td>
+                <td><span class="badge rounded-pill bg-secondary bg-opacity-15 text-dark"><i class="bi bi-image me-1"></i>Image</span></td>
+                <td><span class="badge rounded-pill bg-light text-dark border">en</span></td>
+                <td class="small text-muted">22 Mar 2025</td>
+              </tr>
+              <tr>
+                <td class="font-monospace small text-muted">#4020</td>
+                <td class="fw-semibold">arjun.m@school.in</td>
+                <td><span class="adm-badge-subject bg-info bg-opacity-10 text-info">Mathematics</span></td>
+                <td class="small">Polynomials</td>
+                <td class="small text-muted" style="max-width: 220px;">Find zeros of p(x)=…</td>
+                <td><span class="badge rounded-pill bg-light text-dark border"><i class="bi bi-keyboard me-1"></i>Text</span></td>
+                <td><span class="badge rounded-pill bg-light text-dark border">hi</span></td>
+                <td class="small text-muted">22 Mar 2025</td>
+              </tr>
+              <tr>
+                <td class="font-monospace small text-muted">#4018</td>
+                <td class="fw-semibold">neha.k@school.in</td>
+                <td><span class="adm-badge-subject bg-warning bg-opacity-25 text-dark">SST</span></td>
+                <td class="small">Nationalism</td>
+                <td class="small text-muted" style="max-width: 220px;">Discuss Civil Disobedience…</td>
+                <td><span class="badge rounded-pill bg-secondary bg-opacity-15 text-dark"><i class="bi bi-image me-1"></i>Image</span></td>
+                <td><span class="badge rounded-pill bg-light text-dark border">en</span></td>
+                <td class="small text-muted">21 Mar 2025</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="d-flex justify-content-between align-items-center px-3 py-3 border-top bg-light">
+          <span class="small text-muted">Page 1 of 125</span>
+          <nav>
+            <ul class="pagination pagination-sm mb-0">
+              <li class="page-item disabled"><span class="page-link border-0 bg-transparent">Prev</span></li>
+              <li class="page-item active"><span class="page-link border-0 rounded">1</span></li>
+              <li class="page-item"><a class="page-link border-0 text-dark" href="#">2</a></li>
+              <li class="page-item"><a class="page-link border-0 bg-transparent" href="#">Next</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
