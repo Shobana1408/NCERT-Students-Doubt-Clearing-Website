@@ -1,0 +1,6 @@
+<%-- Expects: ctx, footerNote (optional) --%>
+<footer class="nc-footer py-3 mt-auto">
+  <div class="container-fluid px-3 px-lg-4 text-center text-md-start">
+    <span class="text-muted small"><c:out value="${not empty footerNote ? footerNote : 'NCERT Doubt Solver'}" /></span>
+  </div>
+</footer>
