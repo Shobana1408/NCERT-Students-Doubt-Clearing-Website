@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NCERT Doubt Solver — Result</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="ncert-result.css" />
+</head>
+<body>
+  <div class="page-bg"></div>
+
+  <header class="site-header">
+    <div class="brand">
+      <div class="brand-mark">✦</div>
+      <div>
+        <h1 class="brand-title">NCERT Doubt Solver</h1>
+        <p class="brand-sub">AI-Powered Learning Assistant</p>
+      </div>
+    </div>
+    <span class="pill pill--accent">Result Page</span>
+  </header>
+
+  <main class="main">
+    <section class="card hero-card">
+      <h2 class="hero-title">Your doubt has been analyzed</h2>
+      <p class="hero-lede">
+        Review the extracted question, direct answer, step-by-step explanation,
+        simple explanation, and translated response below.
+      </p>
+    </section>
+
+    <section class="card">
+      <div class="card-head">
+        <h3 class="card-title">Original Question</h3>
+        <span class="chip">Student Input</span>
+      </div>
+
+      <div class="question-body">
+        <p class="question-text" id="questionText"></p>
+      </div>
+
+      <p class="meta-line">
+        <span class="meta-label">Details</span>
+        <span id="metaSubject"></span>
+      </p>
+    </section>
+
+    <section class="card">
+      <div class="card-head">
+        <h3 class="card-title">OCR Extracted Text</h3>
+        <span class="chip chip--muted">Image/Text Capture</span>
+      </div>
+
+      <pre class="ocr-block" id="ocrText" tabindex="0"></pre>
+      <p class="hint">If no image was uploaded, this section may match the typed question.</p>
+    </section>
+
+    <section class="card">
+      <div class="card-head card-head--tabs">
+        <h3 class="card-title">AI Explanation</h3>
+
+        <div class="view-toggle" role="tablist" aria-label="View mode toggle">
+          <button
+            class="view-toggle__btn is-active"
+            id="accordionViewBtn"
+            type="button"
+          >
+            Accordion View
+          </button>
+          <button
+            class="view-toggle__btn"
+            id="tabViewBtn"
+            type="button"
+          >
+            Tab View
+          </button>
+        </div>
+      </div>
+
+      <!-- Accordion View -->
+      <div class="accordion" id="accordionView">
+        <div class="accordion__item is-open">
+          <button class="accordion__trigger" type="button">
+            <span class="accordion__label">Direct Answer</span>
+            <span class="accordion__chip">Core</span>
+            <span class="accordion__icon"></span>
+          </button>
+          <div class="accordion__panel">
+            <div class="accordion__inner">
+              <div class="prose">
+                <p id="answerText"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion__item">
+          <button class="accordion__trigger" type="button">
+            <span class="accordion__label">Step-by-Step Explanation</span>
+            <span class="accordion__chip">Method</span>
+            <span class="accordion__icon"></span>
+          </button>
+          <div class="accordion__panel">
+            <div class="accordion__inner">
+              <div class="prose" id="stepsText"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion__item">
+          <button class="accordion__trigger" type="button">
+            <span class="accordion__label">Simple Explanation</span>
+            <span class="accordion__chip">Easy</span>
+            <span class="accordion__icon"></span>
+          </button>
+          <div class="accordion__panel">
+            <div class="accordion__inner">
+              <div class="prose">
+                <p id="simpleText"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion__item">
+          <button class="accordion__trigger" type="button">
+            <span class="accordion__label">Translated Response</span>
+            <span class="accordion__chip">Language</span>
+            <span class="accordion__icon"></span>
+          </button>
+          <div class="accordion__panel">
+            <div class="accordion__inner">
+              <div class="prose prose--translated">
+                <p id="translatedText"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab View -->
+      <div class="tabbed is-hidden" id="tabView">
+        <div class="tabs-bar">
+          <button class="tabs-bar__tab is-active" type="button" data-tab="answerPanel">Answer</button>
+          <button class="tabs-bar__tab" type="button" data-tab="stepsPanel">Steps</button>
+          <button class="tabs-bar__tab" type="button" data-tab="simplePanel">Simple</button>
+          <button class="tabs-bar__tab" type="button" data-tab="translatedPanel">Translated</button>
+        </div>
+
+        <div class="tabs-panels">
+          <div class="tabs-panels__panel is-active" id="answerPanel">
+            <div class="prose">
+              <p id="tabAnswerText"></p>
+            </div>
+          </div>
+
+          <div class="tabs-panels__panel" id="stepsPanel">
+            <div class="prose" id="tabStepsText"></div>
+          </div>
+
+          <div class="tabs-panels__panel" id="simplePanel">
+            <div class="prose">
+              <p id="tabSimpleText"></p>
+            </div>
+          </div>
+
+          <div class="tabs-panels__panel" id="translatedPanel">
+            <div class="prose prose--translated">
+              <p id="tabTranslatedText"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card card--feedback">
+      <p class="feedback-prompt">Was this explanation helpful?</p>
+
+      <div class="feedback-actions">
+        <button class="feedback-btn feedback-btn--yes" id="helpfulBtn" type="button" aria-pressed="false">
+          <span class="feedback-btn__icon">✓</span>
+          Helpful
+        </button>
+
+        <button class="feedback-btn feedback-btn--no" id="notHelpfulBtn" type="button" aria-pressed="false">
+          <span class="feedback-btn__icon">✕</span>
+          Not Helpful
+        </button>
+      </div>
+
+      <p class="feedback-toast" id="feedbackMessage"></p>
+    </section>
+
+    <p class="footer-note">
+      NCERT Doubt Solver · AI-generated result page
+    </p>
+  </main>
+
+  <script src="ncert-result.js"></script>
+</body>
+</html>
